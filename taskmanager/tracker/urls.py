@@ -1,0 +1,14 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('submit/', views.task_submit, name='submit'),
+    path('task/<int:task_id>/edit/', views.edit_task, name='edit_task'),
+    path('task/<int:task_id>/delete/', views.delete_task, name='delete_task'),
+    path('dashboard/', views.manager_dashboard, name='dashboard'),
+    path('export/', views.export_csv, name='export_csv'),
+]

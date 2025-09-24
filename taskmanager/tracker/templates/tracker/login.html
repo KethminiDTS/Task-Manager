@@ -1,0 +1,24 @@
+{% extends "tracker/base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+            <h2 class="text-center mb-4">Login to Task Manager</h2>
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <p class="text-center mt-3">
+                Not registered? 
+                <a href="{% url 'register' %}">Register Here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

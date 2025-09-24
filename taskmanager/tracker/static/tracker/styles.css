@@ -1,0 +1,59 @@
+/* styles.css - Global styles */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #4e54c8;
+    border-color: #4e54c8;
+}
+
+.btn-primary:hover {
+    background-color: #3c3fac;
+    border-color: #3c3fac;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.navbar {
+    border-bottom: 1px solid #ddd;
+}
+
+.table {
+    background-color: white;
+}
+
+input.form-control, textarea.form-control, select.form-select {
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.alert {
+    border-radius: 6px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+.card {
+    border-radius: 12px;
+    padding: 20px;
+}
+
+label {
+    font-weight: 500;
+}
