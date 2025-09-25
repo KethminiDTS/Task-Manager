@@ -9,7 +9,8 @@ from django.http import HttpResponse
 import csv
 from datetime import date
 from .forms import EmailLoginForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from django.db.models import Q
 
 def register(request):
@@ -41,10 +42,31 @@ def login_view(request):
                 error = "Invalid email or password."
     return render(request, 'tracker/login.html', {'form': form, 'error': error})
 
+class RoleBasedLoginView(LoginView):
+    def get_success_url(self):
+        user = self.request.user
+        if user.role == 'manager':
+            return reverse_lazy('dashboard')  # Manager dashboard
+        elif user.role == 'employee':
+            return reverse_lazy('submit')  # Employee task form
+        return reverse_lazy('home')  # Fallback
+    
+
+def role_based_logout(request):
+    if request.user.is_authenticated:
+        user_role = request.user.role
+        logout(request)
+
+        if user_role == 'manager':
+            return redirect('login')  # Or a special manager logout page
+        else:
+            return redirect('home')  # Employee or public home page
+    else:
+        return redirect('home')
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('/')
 
 
 def home(request):
@@ -112,7 +134,7 @@ def export_csv(request):
         tasks = tasks.filter(user_id=selected_employee)
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="filtered_tasks.csv"'
+    response['Content-Disposition'] = 'attachment; filename="tasks.csv"'
 
     writer = csv.writer(response, quoting=csv.QUOTE_ALL)
 
@@ -139,8 +161,6 @@ def export_csv(request):
         ])
 
     return response
-
-
 
 @login_required
 def edit_task(request, task_id):

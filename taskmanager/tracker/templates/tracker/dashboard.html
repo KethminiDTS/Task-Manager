@@ -1,8 +1,7 @@
 {% extends "tracker/base.html" %}
 {% block content %}
-<h2>Manager Dashboard</h2>
+<h2 class="mb-4 text-center">Manager Dashboard</h2>
 
-<a href="{% url 'export_csv' %}" class="btn btn-outline-primary mb-3">Export CSV</a>
 <form method="get" class="row g-3 align-items-end mb-4">
     <div class="col-md-3">
         <label for="date" class="form-label">Filter by Date</label>
@@ -77,4 +76,7 @@
         {% endfor %}
     </tbody>
 </table>
+<div class="d-flex justify-content-end mt-4">
+    <a href="{% url 'export_csv' %}" class="btn btn-outline-primary mb-3">Export CSV</a>
+</div>
 {% endblock %}

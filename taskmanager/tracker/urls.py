@@ -11,4 +11,6 @@ urlpatterns = [
     path('task/<int:task_id>/delete/', views.delete_task, name='delete_task'),
     path('dashboard/', views.manager_dashboard, name='dashboard'),
     path('export/', views.export_csv, name='export_csv'),
+    path('login/', views.RoleBasedLoginView.as_view(), name='login'),
+    path('logout/', views.role_based_logout, name='logout'),
 ]
