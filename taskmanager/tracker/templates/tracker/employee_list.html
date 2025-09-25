@@ -1,0 +1,39 @@
+{% extends 'tracker/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Registered Employees</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ emp.first_name }}</td>
+                    <td>{{ emp.last_name }}</td>
+                    <td>{{ emp.office_email }}</td>
+                     <td>
+                        <a href="{% url 'edit_employee' emp.id %}" class="btn btn-sm btn-outline-warning me-1">Edit</a>
+                        <a href="{% url 'delete_employee' emp.id %}" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to delete this employee?');">
+                        Delete
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No employees found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

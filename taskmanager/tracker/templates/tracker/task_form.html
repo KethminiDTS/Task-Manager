@@ -63,7 +63,7 @@
                         <td>{{ task.completed_date|date:"m/d/Y" }}</td>
                         <td>{{ task.comments }}</td>
                         <td>
-                            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-warning me-1">Edit</a>
                             <a href="{% url 'delete_task' task.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
                         </td>
                     </tr>

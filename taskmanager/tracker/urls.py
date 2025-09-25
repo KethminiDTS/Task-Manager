@@ -13,4 +13,7 @@ urlpatterns = [
     path('export/', views.export_csv, name='export_csv'),
     path('login/', views.RoleBasedLoginView.as_view(), name='login'),
     path('logout/', views.role_based_logout, name='logout'),
+    path('employees/', views.employee_list, name='employee_list'),
+    path('employees/edit/<int:user_id>/', views.edit_employee, name='edit_employee'),
+    path('employees/delete/<int:user_id>/', views.delete_employee, name='delete_employee'),
 ]

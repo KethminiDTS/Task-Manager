@@ -183,3 +183,46 @@ def delete_task(request, task_id):
         messages.success(request, 'Task deleted successfully.')
         return redirect('submit')
     return render(request, 'tracker/delete_task.html', {'task': task})
+
+@login_required
+def employee_list(request):
+    if request.user.role != 'manager':
+        return redirect('home')
+
+    employees = User.objects.filter(role='employee').order_by('first_name', 'last_name')
+
+    context = {
+        'employees': employees
+    }
+    return render(request, 'tracker/employee_list.html', context)
+
+def edit_employee(request, user_id):
+    if request.user.role != 'manager':
+        return redirect('home')
+
+    user = get_object_or_404(User, id=user_id, role='employee')
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        messages.success(request, "Employee updated successfully.")
+        return redirect('employee_list')
+
+    return render(request, 'tracker/edit_employee.html', {'employee': user})
+
+
+@login_required
+def delete_employee(request, user_id):
+    if request.user.role != 'manager':
+        return redirect('home')
+
+    user = get_object_or_404(User, id=user_id, role='employee')
+    user.delete()
+    messages.success(request, "Employee deleted successfully.")
+    return redirect('employee_list')
