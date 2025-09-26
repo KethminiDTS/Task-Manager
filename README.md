@@ -30,6 +30,29 @@ Frontend: HTML, CSS, Bootstrap 5
 Database: SQLite (default)
 CSV Export: Built-in Django StreamingHttpResponse
 
+🛠️ How to Run Locally
+
+Clone the repository:
+  git clone https://github.com/yourusername/task-manager.git
+  cd task-manager
+
+Create and activate virtual environment:
+  python3 -m venv venv
+  source venv/bin/activate
+
+Install dependencies:
+  pip install -r requirements.txt
+
+Apply migrations:
+  python manage.py migrate
+
+Run the development server:
+  python manage.py runserver 8001
+
+Access the app:
+  Open in your browser: http://127.0.0.1:8001/
+
+
 📌 Future Enhancements
 
 Email reminders for employees
